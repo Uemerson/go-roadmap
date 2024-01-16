@@ -26,6 +26,6 @@ $ ./hello-world
 Hello World!
 ```
 
-# References:
+# References
 
 [Go by Example: Hello World](https://gobyexample.com/hello-world)
