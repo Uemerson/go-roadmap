@@ -7,13 +7,13 @@ Variable is the name given to a memory location to store a value of a specific t
 The var statement declares a list of variables; as in function argument lists, the type is last.
 
 A var statement can be at package or function level.
-[We see both in this example.](./variables/main.go)
+[We see both in this example.](./examples/variables/main.go)
 
 # Variables with initializers
 
 A var declaration can include initializers, one per variable.
 
-If an initializer is present, the type can be omitted; the variable will take the type of the initializer. [See this example.](./variables-with-initializers/main.go)
+If an initializer is present, the type can be omitted; the variable will take the type of the initializer. [See this example.](./examples/variables-with-initializers/main.go)
 
 # Short variable declarations
 
@@ -43,7 +43,7 @@ Go's basic types are
 
 The int, uint, and uintptr types are usually 32 bits wide on 32-bit systems and 64 bits wide on 64-bit systems. When you need an integer value you should use int unless you have a specific reason to use a sized or unsigned integer type.
 
-[The example shows variables of several types, and also that variable declarations may be "factored" into blocks, as with import statements.](./variables-with-initializers/main.go)
+[The example shows variables of several types, and also that variable declarations may be "factored" into blocks, as with import statements.](./examples/variables-with-initializers/main.go)
 
 # Zero values
 
@@ -55,7 +55,7 @@ The zero value is:
     false for the boolean type, and
     "" (the empty string) for strings.
 
-[See this example.](./zero-values/main.go)
+[See this example.](./examples/zero-values/main.go)
 
 # Constants
 
@@ -65,7 +65,7 @@ Constants can be character, string, boolean, or numeric values.
 
 Constants cannot be declared using the := syntax.
 
-[See this example.](./constants/main.go)
+[See this example.](./examples/constants/main.go)
 
 # Numeric Constants
 
@@ -77,7 +77,7 @@ Try printing needInt(Big) too.
 
 (An int can store at maximum a 64-bit integer, and sometimes less.)
 
-[See this example.](./numeric-constants/main.go)
+[See this example.](./examples/numeric-constants/main.go)
 
 # Reference(s)
 
