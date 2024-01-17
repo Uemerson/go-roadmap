@@ -14,25 +14,25 @@ The loop will stop iterating once the boolean condition evaluates to false.
 Note: Unlike other languages like C, Java, or JavaScript there are no parentheses surrounding the three components of the for statement and the braces { } are always required.
 ```
 
-[See this example.](./for/main.go)
+[See this example.](./examples/for/main.go)
 
 # For continued
 
 The init and post statements are optional.
 
-[See this example.](./for-continued/main.go)
+[See this example.](./examples/for-continued/main.go)
 
 # For is Go's "while"
 
 At that point you can drop the semicolons: C's while is spelled for in Go.
 
-[See this example.](./for-is-gos-while/main.go)
+[See this example.](./examples/for-is-gos-while/main.go)
 
 # Forever
 
 If you omit the loop condition it loops forever, so an infinite loop is compactly expressed.
 
-[See this example.](./forever/main.go)
+[See this example.](./examples/forever/main.go)
 
 # Reference(s)
 
