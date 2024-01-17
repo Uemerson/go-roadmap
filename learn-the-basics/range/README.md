@@ -28,3 +28,5 @@ for i := range pow
 [See this example.](./examples/range-continued/main.go)
 
 # Reference(s)
+
+[A Tour of Go](https://go.dev/tour/moretypes/16)
