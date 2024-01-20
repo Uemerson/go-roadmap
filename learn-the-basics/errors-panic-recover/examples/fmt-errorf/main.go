@@ -12,7 +12,7 @@ func Divide(a, b int) (int, error) {
 func main() {
 	value, err := Divide(10, 0)
 
-	if err == nil {
+	if err != nil {
 		fmt.Println(err)
 	} else {
 		fmt.Println(value)
