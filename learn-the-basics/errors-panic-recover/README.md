@@ -9,3 +9,7 @@ Panic recovery in Go depends on a feature of the language called deferred functi
 # Error
 
 [This markdown contains details on how errors work in Go.](./ERROR.md)
+
+# Defer
+
+[This markdown contains details on how defer work in Go.](./DEFER.md)
