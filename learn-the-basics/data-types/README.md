@@ -142,6 +142,40 @@ Integers can be **signed** or **unsigned**.
 
 <br />
 
+# Float
+
+Floats are numbers with decimals. It is of two types
+
+1. float32
+
+   float32 uses single-precision floating point format to store values. Basically it is the set of all IEEE-754 32-bit floating-point numbers. The 32 bits are divided into – 1 bit sign, 8 bits exponent, and 23 bits mantissa. float 32 take half much size as float 64 and are comparatively faster on some machine architectures.
+
+   **Size:** 32 bits or 4 bytes.
+
+   **Range:** 1.2E-38 to 3.4E+38.
+
+   **DefaultValue:** 0.0
+
+   **When to Use:**
+
+   - If in your system memory is a bottleneck and range is less, then **float32** can be used.
+
+2. float64
+
+   float64 uses a double-precision floating-point format to store values. Basically it is the set of all IEEE-754 64-bit floating-point numbers. The 64 bits are divided into – 1-bit sign, 11 bits exponent, 52 bits mantissa. float64 takes twice as much size compared to float32 but can represent numbers more accurately than float32.
+
+   **Size:** 64 bits or 8 bytes.
+
+   **Range:** -1.7e+308 to +1.7e+308.
+
+   **DefaultValue:** 0.0
+
+   **When to Use:**
+
+   - When the precision needed is high
+
+**float64** is the default float type. When you initialize a variable with a decimal value and don’t specify the float type, the default type inferred will be **float64**.
+
 # Composite Types
 
 # Reference(s)
@@ -150,4 +184,4 @@ Integers can be **signed** or **unsigned**.
 
 [builtin](https://pkg.go.dev/builtin)
 
-https://www.callicoder.com/golang-basic-types-operators-type-conversion/
+[Understanding Data Types in Go](https://www.digitalocean.com/community/tutorials/understanding-data-types-in-go)
