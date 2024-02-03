@@ -138,6 +138,34 @@ Integers can be **signed** or **unsigned**.
 
    - uint64 is used when the range is higher.
 
+**uintptr:**
+
+This is an unsigned integer type that is large enough to hold any pointer address. Therefore is size and range are platform dependent.
+
+**Size:** Platform Dependent.
+
+- On 32 bit machines, the size of int will be 32 bits or 4 byte.
+- On 64 bit machines, the size of int will be 64 bits or 8 byte.
+
+**Range:** Again Platform dependent
+
+- On 32 bit machines, the range of int will be 0 to 4294967295.
+- On 64 bit machines, the range of int will be 0 to 18446744073709551615.
+
+**Properties**
+
+- A uintptr can be converted to unsafe. Pointer and viceversa.
+- Arithmetic can be performed on the uintptr.
+- uintptr even though it holds a pointer address, is just a value and does not references any object. Therefore:
+  - Its value will not be updated if the corresponding object moves. Eg When goroutine stack changes.
+  - The corresponding object can be garbage collected.
+
+**When to Use:**
+
+- Its purpose is to be used along with unsafe.Pointer mainly used for unsafe memory access.
+
+- When you want to save the pointer address value for printing it or storing it. Since the address is just stored and does not reference anything, the corresponding object can be garbage collected.
+
 </details>
 
 <br />
@@ -259,6 +287,66 @@ Arrays in go are values. They are fixed-length sequences of the same type. Since
 ### Structs
 
 In GO struct is named collection of fields. These fields can be of different types. Struct acts as a container of related data of heterogeneous data type.
+
+## Reference Types
+
+### Slices
+
+Slices are dynamically sized, reference into the elements of an array. As mentioned above arrays are of fixed size, so slices give a more flexible interface to arrays. A slice is a reference type as it internally references an array. It is internally represented by three fields
+
+- Address to the underlying array
+- Length of the slice
+- Capacity of the slice
+
+Slices are typed by the type of the underlying array element, not by its length or capacity. Thus two slices will be of the same type if the type of the underlying array is same irrespective of its length and capacity. The built in append function can be used to add more values to the underlying array. If on using append function the length of the slice increases by current capacity, then a new slice is allocated of double the capacity and elements of the current slice are copied to that.
+
+**The built in function len can you used to get the current length of the sliceInitialising a slice**
+
+### Channels
+
+Channels provide synchronization and communication between goroutines. You can think of it as a pipe through which goroutines can send values and receive values. The operation <- is used to send or receive, with direction of arrow specifying the direction of flow of data
+
+Channel are of two types
+
+- Unbuffered Channel- It doesn't have any capacity to hold and values and thus
+
+  - Send on a channel is block unless there is another goroutine to receive.
+  - Receive is block until there is another goroutine on the other side to send.
+
+- Buffered Channel- You can specify the size of buffer here and for them
+
+  - Send on a buffer channel only blocks if the buffer is full
+  - Receive is the only block is buffer of the channel is empty
+
+A channel holds data of a particular type at a time. While creating a channel, the type of data l has to be specified while initializing a new channel. Channel can be created using make.
+
+### Maps
+
+maps are golang builtin datatype similar to a hash which map key to a value. maps are referenced data types. When you assign one map to another both refer to the same underlying map.
+
+**Zero Value:** zero value of a map is nil
+
+### Pointers
+
+Pointer is a variable that holds a memory address of another variable. **Zero Value:** The zero value of a pointer is nil.
+
+### Functions
+
+n Go function are values and can be passed around like a value. Basically, function can be used as first-order objects and can be passed around. A function has a name, arguments and returns values. Also, note that there are some important differences between method and function in Go.
+
+### Interface
+
+Interface is a type in Go which is a collection of method signatures. Any type which implements all methods of the interface is of that interface type. Zero value of an interface is nil.
+
+**Interface are implemented implicitly**
+
+There is no explicit declaration that a type implements an interface. In fact, in Go there doesn't exist any "implements" keyword similar to Java. A type implements an interface if it implements all the methods of the interface.
+
+It is correct to define a variable of an interface type and we can assign any concrete type value to this variable if the concrete type implements all the methods of the interface.
+
+**Special case of empty interface**
+
+An empty interface has no methods, hence by default all concrete types implement the empty interface. If you write a function that accepts an empty interface then you can pass any type to that function.
 
 # Reference(s)
 
