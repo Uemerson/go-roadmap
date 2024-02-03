@@ -176,7 +176,73 @@ Floats are numbers with decimals. It is of two types
 
 **float64** is the default float type. When you initialize a variable with a decimal value and don’t specify the float type, the default type inferred will be **float64**.
 
-# Composite Types
+# Complex Numbers
+
+Complex Numbers are of two types
+
+1. complex64
+
+   Both real and imaginary part are float32
+
+   **Size:** Both real and imaginary part are of same size as float32. It is of size 32 bits or 4 bytes.
+
+   **Range:** Both real and imaginary part range is same as float32 i.e 1.2E-38 to 3.4E+38.
+
+2. complex128
+
+   Both real and imaginary part are float64
+
+   **Size:** Both real and imaginary part are of same size as float64. It is of size 64 bits or 8 bytes.
+
+   **Range:** Both real and imaginary part range is same as float64 i.e -1.7E+308 to +1.7E+308.
+
+# Byte
+
+byte in Go is an alias for uint8 meaning it is an integer value. This integer value is of 8 bits and it represents one byte i.e number between 0-255). A single byte therefore can represent ASCII characters. Golang does not have any data type of ‘char’. Therefore
+
+- byte is used to represent the ASCII character
+
+- rune is used to represent all UNICODE characters which include every character that exists. We will study about rune later in this tutorial.
+
+# Rune
+
+rune in Go is an alias for int32 meaning it is an integer value. This integer value is meant to represent a Unicode Code Point. To understand rune you have to know what Unicode is.
+
+**What is UniCode**
+
+Unicode is a superset of ASCII characters which assigns a unique number to every character that exists. This unique number is called Unicode Code Point.
+
+For eg
+
+- Digit 0 is represented as Unicode Point U+0030 (Decimal Value – 48)
+- Small Case b is represented as Unicode Point U+0062 (Decimal Value – 98)
+- A pound symbol £ is represented as Unicode Point U+00A3 (Decimal Value – 163)
+
+# String
+
+string is a read only slice of bytes in golang. String can be initialized in two ways
+
+- using double quotes “” eg “this”
+
+string in double quotes honors the escape sequences. For eg if the string contains a \n then while printing there will be a new line
+
+- using back quotes ` eg  \`this`
+
+String in back quotes is just a raw string and it does not honor any kind of escape sequences.
+
+Each character in a string will occupy some bytes depending upon encoding used. For eg in utf-8 encoded string, each character will occupy between 1-4 bytes. You can read about utf-8 in this must read famous blog-The Absolute Minimum Every Software Developer Absolutely, Positively Must Know About Unicode and Character Sets (No Excuses!). In utf-8 , the characters a or b are encoded using 1 byte while the character pound sign £ is encoded using two bytes . Therefore the string “ab£” will output 4 bytes when you will convert the string to byte array and print it like below
+
+# Booleans
+
+The data type is bool and has two possible values true or false.
+
+Default Value: false
+
+Operations:
+
+    AND – &&
+    OR  – ||
+    Negation – !
 
 # Reference(s)
 
