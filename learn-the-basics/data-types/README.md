@@ -244,6 +244,22 @@ Operations:
     OR  – ||
     Negation – !
 
+# Composite Types
+
+## Non-Reference Types
+
+### Arrays
+
+Arrays in go are values. They are fixed-length sequences of the same type. Since arrays in Go are values, that is why
+
+- When you assign an array to another variable, it copies the entire array
+
+- When you pass an array as an argument to a function, it makes an entire copy of the array instead of passing just the address
+
+### Structs
+
+In GO struct is named collection of fields. These fields can be of different types. Struct acts as a container of related data of heterogeneous data type.
+
 # Reference(s)
 
 [All data types in Golang with examples](https://golangbyexample.com/all-data-types-in-golang-with-examples/)
