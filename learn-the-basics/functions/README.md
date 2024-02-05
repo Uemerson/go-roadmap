@@ -54,3 +54,9 @@ Closures are a special case of anonymous functions. Closures are anonymous funct
 Go supports recursive functions.
 
 [Here’s a classic example.](./examples/recursion/main.go)
+
+# Pointers
+
+Go supports pointers, allowing you to pass references to values and records within your program.
+
+[See this example.](./examples/pointers/main.go)
