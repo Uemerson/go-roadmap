@@ -48,3 +48,9 @@ An anonymous function is a function that was declared without any named identifi
 Closures are a special case of anonymous functions. Closures are anonymous functions which access the variables defined outside the body of the function.
 
 [See this example.](./examples/closures/main.go)
+
+# Recursion
+
+Go supports recursive functions.
+
+[Here’s a classic example.](./examples/recursion/main.go)
