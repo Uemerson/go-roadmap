@@ -21,6 +21,12 @@ A declaration begins with the func keyword, followed by the name you want the fu
 
 [See this example.](./examples/function/main.go)
 
+# The return values of a function can be named in Golang
+
+Golang allows you to name the return values of a function. We can also name the return value by defining variables.
+
+[See this example.](./examples/return-function-named/main.go)
+
 # Multiple Return Values
 
 Go has built-in support for multiple return values. This feature is used often in idiomatic Go, for example to return both result and error values from a function.
