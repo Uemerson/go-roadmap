@@ -17,3 +17,9 @@ A declaration begins with the func keyword, followed by the name you want the fu
 Go has built-in support for multiple return values. This feature is used often in idiomatic Go, for example to return both result and error values from a function.
 
 [See this example.](./examples/multiple-return-values/main.go)
+
+# Variadic Functions
+
+Variadic functions can be called with any number of trailing arguments. For example, fmt.Println is a common variadic function.
+
+[Here’s a function](./examples/variadic-functions/main.go) that will take an arbitrary number of ints as arguments.
