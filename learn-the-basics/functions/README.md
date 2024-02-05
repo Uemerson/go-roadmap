@@ -11,3 +11,9 @@ Function allows you to extract commonly used block of code into a single compone
 A declaration begins with the func keyword, followed by the name you want the function to have, a pair of parentheses (), and then a block containing the function's code.
 
 [See this example.](./examples/function/main.go)
+
+# Multiple Return Values
+
+Go has built-in support for multiple return values. This feature is used often in idiomatic Go, for example to return both result and error values from a function.
+
+[See this example.](./examples/multiple-return-values/main.go)
