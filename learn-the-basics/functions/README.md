@@ -42,3 +42,9 @@ An anonymous function is a function that was declared without any named identifi
 [Passing arguments to anonymous functions](./examples/passing-arguments-to-anonymous-functions/main.go)
 
 [Function defined to accept a parameter and return value.](./examples/function-accept-parameter-return-value/main.go)
+
+# Closures Functions
+
+Closures are a special case of anonymous functions. Closures are anonymous functions which access the variables defined outside the body of the function.
+
+[See this example.](./examples/closures/main.go)
