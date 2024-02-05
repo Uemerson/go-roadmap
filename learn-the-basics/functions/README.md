@@ -32,3 +32,13 @@ Go has built-in support for multiple return values. This feature is used often i
 Variadic functions can be called with any number of trailing arguments. For example, fmt.Println is a common variadic function.
 
 [Here’s a function](./examples/variadic-functions/main.go) that will take an arbitrary number of ints as arguments.
+
+# Anonymous Functions
+
+An anonymous function is a function that was declared without any named identifier to refer to it. Anonymous functions can accept inputs and return outputs, just as standard functions do.
+
+[Assigning function to the variable](./examples/assigning-function-to-variable/main.go)
+
+[Passing arguments to anonymous functions](./examples/passing-arguments-to-anonymous-functions/main.go)
+
+[Function defined to accept a parameter and return value.](./examples/function-accept-parameter-return-value/main.go)
