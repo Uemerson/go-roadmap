@@ -66,3 +66,9 @@ Go supports recursive functions.
 Go supports pointers, allowing you to pass references to values and records within your program.
 
 [See this example.](./examples/pointers/main.go)
+
+# Reference(s)
+
+[Golang Functions](https://www.golangprograms.com/go-language/functions.html)
+
+[Go by Example: Functions](https://gobyexample.com/functions)
