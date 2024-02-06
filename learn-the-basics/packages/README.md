@@ -45,3 +45,9 @@ In Go language, when you name a package you must always follow the following poi
 - Always try to avoid choosing names that are commonly used or used for local relative variables.
 - The name of the package generally in the singular form. Sometimes some packages named in plural form like strings, bytes, buffers, etc. Because to avoid conflicts with the keywords.
 - Always avoid package names that already have other connotations.
+
+# Reference(s)
+
+[Packages](https://www.golang-book.com/books/intro/11)
+
+[Packages in Golang Read](https://www.geeksforgeeks.org/packages-in-golang/)
