@@ -1,0 +1,6 @@
+go 1.21.6
+
+use (
+	./learn-the-basics/basic-syntax/examples/hello-world
+	./learn-the-basics/packages/examples/packages
+)
