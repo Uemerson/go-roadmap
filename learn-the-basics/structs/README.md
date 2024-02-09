@@ -6,7 +6,13 @@ Structs are user-defined types that help us create a collection of data describi
 
 A struct is a collection of fields.
 
-[See this example.](./examples/arrays/main.go)
+[See this example.](./examples/structs/main.go)
+
+# Struct Fields
+
+Struct fields are accessed using a dot.
+
+[See this example.](./examples/struct-fields/main.go)
 
 # Reference(s)
 
