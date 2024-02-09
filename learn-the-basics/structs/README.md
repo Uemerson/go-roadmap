@@ -22,6 +22,16 @@ To access the field X of a struct when we have the struct pointer p we could wri
 
 [See this example.](./examples/struct-pointers/main.go)
 
+# Struct Literals
+
+A struct literal denotes a newly allocated struct value by listing the values of its fields.
+
+You can list just a subset of fields by using the Name: syntax. (And the order of named fields is irrelevant.)
+
+The special prefix & returns a pointer to the struct value.
+
+[See this example.](./examples/struct-literals/main.go)
+
 # Reference(s)
 
 [A Tour of Go](https://go.dev/tour/moretypes/2)
