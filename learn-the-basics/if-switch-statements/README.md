@@ -26,6 +26,18 @@ Variables declared inside an if short statement are also available inside any of
 
 [See this example.](./examples/if-and-else/main.go) (Both calls to pow return their results before the call to fmt.Println in main begins.)
 
+# Another examples if/else
+
+Branching with if and else in Go is straight-forward.
+
+You can have an if statement without an else.
+
+Logical operators like && and || are often useful in conditions.
+
+A statement can precede conditionals; any variables declared in this statement are available in the current and all subsequent branches.
+
+[See this example.](./examples/another-examples-if-else/main.go)
+
 # Switch
 
 A switch statement is a shorter way to write a sequence of if - else statements. It runs the first case whose value is equal to the condition expression.
@@ -64,3 +76,5 @@ This construct can be a clean way to write long if-then-else chains.
 # Reference(s)
 
 [A Tour of Go](https://go.dev/tour/flowcontrol/5)
+
+[Go by Example: If/Else](https://gobyexample.com/if-else)
