@@ -16,6 +16,8 @@ We will see the working of the buffer in go language with the help of the below 
 - We can check the length of the string stored on the buffer variable which we have created.
 - Even we can store the bytes of data like x.Write([]byte(“Hello “)), and we can get the length of the stored value in the form of a number like x.len().
 
+[See this example](./examples/buffer/main.go)
+
 # Reference(s)
 
 [Golang Buffer](https://www.educba.com/golang-buffer/)
