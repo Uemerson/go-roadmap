@@ -38,6 +38,37 @@ In Go, `module names are used system-wide and therefore should be as specific as
 
 It's important to choose meaningful and descriptive names for modules, as they are publicly identifiable and may be used as dependencies in other projects. Clear and consistent naming conventions help in understanding the purpose and context of a module.
 
+# go.mod
+
+The `go.mod` file is where Go will manage the list of dependencies used by your application. Additionally, it is where the name of your module and the Go version used by your application are defined.
+
+To enable dependency tracking for your code, run the `go mod init command`, giving it the name of the module your code will be in, for example:
+
+```
+$ go mod init `your-package-name`
+```
+
+    In actual development, the module path will typically be the repository location where your source code will be kept. For example, the module path might be github.com/Uemerson/go-roadmap/learn-the-basics/basic-syntax/hello-world.
+
+# File Tree for a Modular Go Project
+
+```
+/home/user/projects/
+└── myapp/                 # Your project
+    ├── custom/            # Custom packages
+    |   └── ...            # .go files defining functionality
+    ├── go.mod             # go.mod file defining dependencies & versions
+    ├── go.sum             # go.sum file that verifies dependency integrity
+    └── main.go            # Entrypoint
+```
+
+In this structure:
+
+- Your project can live anywhere in your file system. It contains a go.mod file and a go.sum file.
+- The go.mod file lists the specific versions of the dependencies that your project uses.
+- The go.sum file provides checksums for the exact contents of each dependency at the time it is added to your module.
+- The dependencies are stored in the Go module cache, which is shared across all projects on your system.
+
 # References
 
 [Golang Environment – GOPATH vs go.mod](https://www.freecodecamp.org/news/golang-environment-gopath-vs-go-mod/)
