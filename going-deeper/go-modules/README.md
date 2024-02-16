@@ -69,6 +69,26 @@ In this structure:
 - The go.sum file provides checksums for the exact contents of each dependency at the time it is added to your module.
 - The dependencies are stored in the Go module cache, which is shared across all projects on your system.
 
+# Module CLI Commands
+
+There are several convenient commands available for working with modular Go projects:
+
+`go mod init`: Initializes a new module in the current directory. It creates a `go.mod` file that defines the module's path and sets it up for dependency management.
+
+`go mod tidy`: Adds missing and removes unused modules and dependencies from the go.mod file. It ensures that the `go.mod` file accurately reflects the required dependencies of your project.
+
+`go mod download`: Downloads the dependencies defined in the go.mod file and stores them in the module cache. It fetches the specific versions of the dependencies needed for your project.
+
+`go mod vendor`: Copies the dependencies into a vendor directory within your project. This command is useful when you want to create a self-contained project that includes all its dependencies.
+
+`go mod verify`: Verifies that the dependencies in the module cache match the expected cryptographic checksums specified in the `go.sum` file. It ensures the integrity and authenticity of the downloaded dependencies.
+
+`go mod graph`: Prints the module dependency graph, showing the relationships between modules and their versions. It can be useful for understanding the overall structure of your project's dependencies.
+
+`go mod edit`: Provides a range of subcommands for making manual edits to the `go.mod` file. It allows you to add, remove, or update module requirements, replace modules, and more.
+
+These are just a few of the commonly used go mod commands. You can explore more commands and their options by running go help mod or referring to the official Go documentation on modules.
+
 # References
 
 [Golang Environment – GOPATH vs go.mod](https://www.freecodecamp.org/news/golang-environment-gopath-vs-go-mod/)
