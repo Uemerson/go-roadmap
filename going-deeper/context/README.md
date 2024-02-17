@@ -52,6 +52,16 @@ Cancellation is an essential aspect of context management. It allows you to grac
 
 In this example, we create a context using `context.WithCancel()` and defer the cancellation function. The `performTask` goroutine continuously performs a task until the context is canceled. After 2 seconds, we call the cancel function to initiate the cancellation process. As a result, the goroutine detects the cancellation signal and terminates the task.
 
+# Timeouts and Deadlines
+
+Setting timeouts and deadlines is crucial when working with context in Golang. It ensures that operations complete within a specified timeframe and prevents potential bottlenecks or indefinite waits.
+
+## Setting a Deadline for Context
+
+[In this example](./examples/setting-a-deadline-for-context/main.go), we create a context with a deadline and perform a task that exceeds the deadline.
+
+In this example, we create a context with a deadline of 2 seconds using `context.WithDeadline()`. The `performTask` goroutine waits for the context to be canceled or for the deadline to be exceeded. After 3 seconds, we let the program exit, triggering the deadline exceeded error.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
