@@ -32,6 +32,16 @@ Once you have a context, you can propagate it to downstream functions or gorouti
 
 In this example, we create a parent context using `context.Background()`. We then use `context.WithValue()` to attach a user ID to the context. The context is then passed to the `performTask` goroutine, which retrieves the user ID using `ctx.Value()`.
 
+# Retrieving Values from Context
+
+In addition to propagating context, you can also retrieve values stored within the context. This allows you to access important data or parameters within the scope of a specific goroutine or function.
+
+## Retrieving User Information from Context
+
+[In this example](./examples/retrieving-values-from-context/main.go), we create a context with user information and retrieve it in a downstream function.
+
+In this example, we create a context using `context.WithValue()` and store the user ID. The context is then passed to the `processRequest` function, where we retrieve the user ID using type assertion and use it for further processing.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
