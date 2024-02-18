@@ -72,6 +72,16 @@ Context plays a vital role in managing HTTP requests in Go. It allows you to con
 
 In this example, we create a context with a timeout of 2 seconds using `context.WithTimeout()`. We then create an HTTP request with the custom context using `http.NewRequestWithContext()`. The context ensures that if the request takes longer than the specified timeout, it will be canceled.
 
+# Context in Database Operations
+
+Context is also useful when dealing with database operations in Golang. It allows you to manage query cancellations, timeouts, and pass relevant data within the database transactions.
+
+## Using Context in Database Operations
+
+[In this example](./examples/using-context-in-database-operations/main.go), we demonstrate how to use context with a PostgreSQL database operation.
+
+In this example, we create a context with a timeout of 2 seconds using `context.WithTimeout()`. We then open a connection to a PostgreSQL database using the `sql.Open()` function. When executing the database query with `db.QueryContext()`, the context ensures that the operation will be canceled if it exceeds the specified timeout.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
