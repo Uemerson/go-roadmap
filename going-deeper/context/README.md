@@ -82,6 +82,28 @@ Context is also useful when dealing with database operations in Golang. It allow
 
 In this example, we create a context with a timeout of 2 seconds using `context.WithTimeout()`. We then open a connection to a PostgreSQL database using the `sql.Open()` function. When executing the database query with `db.QueryContext()`, the context ensures that the operation will be canceled if it exceeds the specified timeout.
 
+# Best Practices for Using Context
+
+When working with context in Golang, it is essential to follow some best practices to ensure efficient and reliable concurrency management.
+
+## Implementing Best Practices for Context Usage
+
+Here are some best practices to consider:
+
+1. Pass Context Explicitly: Always pass the context as an explicit argument to functions or goroutines instead of using global variables. This makes it easier to manage the context’s lifecycle and prevents potential data races.
+
+2. Use context.TODO(): If you are unsure which context to use in a particular scenario, consider using `context.TODO()`. However, make sure to replace it with the appropriate context later.
+
+3. Avoid Using context.Background(): Instead of using `context.Background()` directly, create a specific context using `context.WithCancel()` or `context.WithTimeout()` to manage its lifecycle and avoid resource leaks.
+
+4. Prefer Cancel Over Timeout: Use `context.WithCancel()` for cancellation when possible, as it allows you to explicitly trigger cancellation when needed. `context.WithTimeout()` is more suitable when you need an automatic cancellation mechanism.
+
+5. Keep Context Size Small: Avoid storing large or unnecessary data in the context. Only include the data required for the specific operation.
+
+6. Avoid Chaining Contexts: Chaining contexts can lead to confusion and make it challenging to manage the context hierarchy. Instead, propagate a single context throughout the application.
+
+7. Be Mindful of Goroutine Leaks: Always ensure that goroutines associated with a context are properly closed or terminated to avoid goroutine leaks.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
