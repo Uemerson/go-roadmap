@@ -68,7 +68,7 @@ Context plays a vital role in managing HTTP requests in Go. It allows you to con
 
 ## Using Context in HTTP Requests
 
-[In this example](./examples/), we make an HTTP request with a custom context and handle timeouts.
+[In this example](./examples/using-context-in-http-requests/main.go), we make an HTTP request with a custom context and handle timeouts.
 
 In this example, we create a context with a timeout of 2 seconds using `context.WithTimeout()`. We then create an HTTP request with the custom context using `http.NewRequestWithContext()`. The context ensures that if the request takes longer than the specified timeout, it will be canceled.
 
