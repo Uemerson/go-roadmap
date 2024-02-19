@@ -120,6 +120,28 @@ Web servers handle multiple concurrent requests, and context helps manage the li
 
 When writing test suites, context can be utilized to manage test timeouts, control test-specific configurations, and enable graceful termination of tests. Context allows tests to be canceled or skipped based on certain conditions, enhancing test control and flexibility.
 
+# Common Pitfalls to Avoid
+
+1. Not propagating the context — Child functions need the context passed to them in order to honor cancelation. Don’t create contexts and keep them confined to one function.
+
+2. Forgetting to call cancel — When done with a cancelable context, call the cancel function. This releases resources and stops any associated goroutines.
+
+3. Leaking goroutines — Goroutines started with a context must check the Done channel to exit properly. Otherwise they risk leaking when the context is canceled.
+
+4. Using basic context.Background for everything — Background lacks cancelation and timeouts. Use the WithCancel, WithTimeout, or WithDeadline functions to add control.
+
+5. Passing nil contexts — Passing nil instead of a real context causes panics. Make sure context is never nil when passing it.
+
+6. Checking context too early — Don’t check context conditions like Done() early in an operation. This risks canceling before the work starts.
+
+7. Using blocking calls — Blocking calls like file/network IO should be wrapped to check context cancellation. This avoids hanging.
+
+8. Overusing contexts — Contexts are best for request-scoped operations. For globally shared resources, traditional patterns may be better.
+
+9. Assuming contexts have timeouts — The context.Background has no deadline. Add timeouts explicitly when needed.
+
+10. Forgetting contexts expire — Don’t start goroutines with a context and assume they will run forever. The context may expire.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
