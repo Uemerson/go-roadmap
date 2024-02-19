@@ -160,6 +160,19 @@ ctx, cancel := context.WithCancel(context.Background())
 
 Now the goroutine will cleanly exit when the parent context is canceled, avoiding the leak. Proper context propagation and lifetime management is key to preventing goroutine leaks in Go programs.
 
+# Using Context with Third-Party Libraries
+
+Sometimes we need using third-party packages. However, many third-party libraries and APIs do not natively support context. So when using such libraries, you need to take some additional steps to integrate context usage properly:
+
+- Wrap the third-party APIs you call in functions that accept a context parameter.
+- In the wrapper function, call the third-party API as normal.
+- Before calling the API, check if the context is done and return immediately if so. This propagates cancellation.
+- After calling the API, check if the context is done and return immediately if so. This provides early return on cancellation.
+- Make sure to call the API in a goroutine if it involves long-running work that could block.
+- Define reasonable defaults for context values like timeout and deadline, so the API call isn’t open-ended.
+
+[This example](./examples/context-with-third-party/main.go) provides context integration even with APIs that don’t natively support it. The key points are wrapping API calls, propagating cancellation, using goroutines, and setting reasonable defaults.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
