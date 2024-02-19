@@ -173,6 +173,51 @@ Sometimes we need using third-party packages. However, many third-party librarie
 
 [This example](./examples/context-with-third-party/main.go) provides context integration even with APIs that don’t natively support it. The key points are wrapping API calls, propagating cancellation, using goroutines, and setting reasonable defaults.
 
+# Context(new features added in go1.21.0)
+
+## func AfterFunc
+
+Managing cleanup and finalization tasks is an important consideration in Go, especially when dealing with concurrency. The context package provides a useful tool for this through its `AfterFunc` function.
+
+`AfterFunc` allows you to schedule functions to run asynchronously after a context ends. This enables deferred cleanup routines that will execute reliably once some operation is complete.
+
+For example, imagine we have an API server that needs to process incoming requests from a queue. We spawn goroutines to handle each request:
+
+```
+func handleRequests(ctx context.Context) {
+  for {
+    req := queue.Get()
+    go process(req)
+
+    if ctx.Done() {
+      break
+    }
+  }
+}
+```
+
+But we also want to make sure any pending requests are processed if handleRequests has to exit unexpectedly. This is where `AfterFunc` can help.
+
+We can schedule a cleanup function to run after the context is cancelled:
+
+```
+ctx, cancel := context.WithCancel(context.Background())
+
+stop := context.AfterFunc(ctx, func() {
+  // Process remaining queue
+})
+
+go handleRequests(ctx)
+
+// Later when done...
+cancel()
+stop() // Prevent cleanup
+```
+
+Now our cleanup logic will run after the context ends. But since we call stop(), it is canceled before executing.
+
+`AfterFunc` allows deferred execution tied to a context’s lifetime. This provides a robust way to build asynchronous applications with proper finalization.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
