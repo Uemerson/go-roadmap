@@ -218,6 +218,36 @@ Now our cleanup logic will run after the context ends. But since we call stop(),
 
 `AfterFunc` allows deferred execution tied to a context’s lifetime. This provides a robust way to build asynchronous applications with proper finalization.
 
+## func WithDeadlineCause
+
+When using contexts with deadlines in Go, timeout errors are common — a context will routinely expire if an operation takes too long. But the generic “context deadline exceeded” error lacks detail on the source of the timeout.
+
+This is where `WithDeadlineCause` comes in handy. It allows you to associate a custom error cause with a context’s deadline:
+
+```
+ctx, cancel := context.WithDeadlineCause(ctx, time.Now().Add(100*time.Millisecond),
+           errors.New("RPC timeout"))
+defer cancel()
+
+// Simulate work
+time.Sleep(200 * time.Millisecond)
+
+// Print the error cause
+fmt.Println(ctx.Err()) // prints "context deadline exceeded: RPC timeout"
+```
+
+Now if the deadline is exceeded, the context’s Err() method will return:
+
+“context deadline exceeded: RPC timeout”
+
+This extra cause string gives critical context on the source of the timeout. Maybe it was due to a backend RPC call failing, or a network request timing out.
+
+Without the cause, debugging the timeout requires piecing together where it came from based on call stacks and logs. But `WithDeadlineCause` allows directly propagating the source of the timeout through the context.
+
+Timeouts tend to cascade through systems — a low-level timeout bubbles up to eventually become an HTTP 500. Maintaining visibility into the original cause is crucial for diagnosing these issues.
+
+`WithDeadlineCause` enables this by letting you customize the deadline exceeded error with contextual details. The error can then be inspected at any level of the stack to understand the timeout source.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
