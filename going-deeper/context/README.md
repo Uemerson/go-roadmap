@@ -248,6 +248,33 @@ Timeouts tend to cascade through systems — a low-level timeout bubbles up to e
 
 `WithDeadlineCause` enables this by letting you customize the deadline exceeded error with contextual details. The error can then be inspected at any level of the stack to understand the timeout source.
 
+# func withTimeoutCause
+
+Managing timeouts is an important aspect of writing reliable Go programs. When using context timeouts, the error “context deadline exceeded” is generic and lacks detail on the source of the timeout.
+
+The `WithTimeoutCause` function addresses this by allowing you to associate a custom error cause with a context’s timeout duration:
+
+```
+ctx, cancel := context.WithTimeoutCause(ctx, 100*time.Millisecond,
+          errors.New("Backend RPC timed out"))
+```
+
+Now if that ctx hits the timeout deadline, the context’s Err() will return:
+
+“context deadline exceeded: Backend RPC timed out”
+
+This provides critical visibility into the source of the timeout when it propagates up a call stack. Maybe it was caused by a slow database query, or a backend RPC service timing out.
+
+Without a customized cause, debugging timeouts requires piecing together logs and traces to determine where it originated. But `WithTimeoutCause` allows directly encoding the source of the timeout into the context error.
+
+Some key benefits of using `WithTimeoutCause`:
+
+- Improved debugging of cascading timeout failures
+- Greater visibility into timeout sources as errors propagate
+- More context for handling and recovering from timeout errors
+
+`WithTimeoutCause` gives more control over timeout errors to better handle them programmatically and debug them when issues arise.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
