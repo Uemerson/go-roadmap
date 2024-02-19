@@ -248,7 +248,7 @@ Timeouts tend to cascade through systems — a low-level timeout bubbles up to e
 
 `WithDeadlineCause` enables this by letting you customize the deadline exceeded error with contextual details. The error can then be inspected at any level of the stack to understand the timeout source.
 
-# func withTimeoutCause
+## func withTimeoutCause
 
 Managing timeouts is an important aspect of writing reliable Go programs. When using context timeouts, the error “context deadline exceeded” is generic and lacks detail on the source of the timeout.
 
@@ -274,6 +274,50 @@ Some key benefits of using `WithTimeoutCause`:
 - More context for handling and recovering from timeout errors
 
 `WithTimeoutCause` gives more control over timeout errors to better handle them programmatically and debug them when issues arise.
+
+## func WithoutCancel
+
+In Go, contexts form parent-child relationships — a canceled parent context will propagate down and cancel all children. This allows canceling an entire tree of operations.
+
+However, sometimes you want to branch off a child context and detach it from the parent’s lifetime. This is useful when you have a goroutine or operation that needs to keep running independently, even if the parent context is canceled.
+
+For example, consider a server handling incoming requests:
+
+```
+func server(ctx context.Context) {
+  for {
+    req := waitForRequest(ctx)
+    go handleRequest(ctx, req) // child ctx
+
+    if ctx.Done() {
+      break
+    }
+  }
+}
+```
+
+If the parent ctx is canceled, the handleRequest goroutines will be abruptly canceled as well. This may interrupt requests that are mid-flight.
+
+We can use `WithoutCancel` to ensure the handler goroutines finish:
+
+```
+func server(ctx context.Context) {
+
+  for {
+     req := waitForRequest(ctx)
+     handlerCtx := context.WithoutCancel(ctx)
+     go handleRequest(handlerCtx, req) // won't be canceled
+
+     if ctx.Done() {
+        break
+     }
+  }
+}
+```
+
+Now the parent can be canceled, but each handler finishes independently.
+
+`WithoutCancel` lets you selectively extract parts of a context tree to isolate from cancelation. This provides more fine-grained control over concurrency when using contexts.
 
 # Reference(s)
 
