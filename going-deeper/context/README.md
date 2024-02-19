@@ -142,6 +142,24 @@ When writing test suites, context can be utilized to manage test timeouts, contr
 
 10. Forgetting contexts expire — Don’t start goroutines with a context and assume they will run forever. The context may expire.
 
+# Context and Goroutine Leaks
+
+Contexts in Go are used to manage the lifecycle and cancellation signaling of goroutines and other operations. A root context is usually created, and child contexts can be derived from it. Child contexts inherit cancellation from their parent contexts.
+
+If a goroutine is started with a context, but does not properly exit when that context is canceled, it can result in a goroutine leak. The goroutine will persist even though the operation it was handling has been canceled.
+
+[Here is an example](./examples/context-and-goroutine-leaks/main.go) of a goroutine leak due to improper context handling
+
+In this example, the goroutine started with the context does not properly exit when that context is canceled. This will result in a goroutine leak, even though the main context is canceled.
+
+To fix it, the goroutine needs to call the context’s Done() channel when the main context is canceled:
+
+```
+ctx, cancel := context.WithCancel(context.Background())
+```
+
+Now the goroutine will cleanly exit when the parent context is canceled, avoiding the leak. Proper context propagation and lifetime management is key to preventing goroutine leaks in Go programs.
+
 # Reference(s)
 
 [The Complete Guide to Context in Golang: Efficient Concurrency Management](https://medium.com/@jamal.kaksouri/the-complete-guide-to-context-in-golang-efficient-concurrency-management-43d722f6eaea)
