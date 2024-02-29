@@ -92,6 +92,52 @@ err := json.Unmarshal(b, &m)
 
 Unmarshal will decode only the fields that it can find in the destination type. In this case, only the Name field of m will be populated, and the Food field will be ignored. This behavior is particularly useful when you wish to pick only a few specific fields out of a large JSON blob. It also means that any unexported fields in the destination struct will be unaffected by Unmarshal.
 
+# Nested Objects
+
+Now, consider the case when you have a property called Dimensions, that measures the Height and Length of the bird in question:
+
+```
+{
+  "species": "pigeon",
+  "description": "likes to perch on rocks"
+  "dimensions": {
+    "height": 24,
+    "width": 10
+  }
+}
+```
+
+As with our previous examples, we need to mirror the structure of the object in our Go code. To add a nested `dimensions` object, lets create a `dimensions` struct:
+
+```
+type Dimensions struct {
+  Height int
+  Width int
+}
+```
+
+Now, the `Bird` struct will include a `Dimensions` field:
+
+```
+type Bird struct {
+  Species string
+  Description string
+  Dimensions Dimensions
+}
+```
+
+We can unmarshal this data using the same method as before:
+
+```
+birdJson := `{"species":"pigeon","description":"likes to perch on rocks", "dimensions":{"height":24,"width":10}}`
+var birds Bird
+json.Unmarshal([]byte(birdJson), &birds)
+fmt.Printf(bird)
+// {pigeon likes to perch on rocks {24 10}}
+```
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
+
+[A Complete Guide to JSON in Golang (With Examples)](https://www.sohamkamani.com/golang/json/)
