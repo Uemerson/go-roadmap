@@ -136,6 +136,33 @@ fmt.Printf(bird)
 // {pigeon likes to perch on rocks {24 10}}
 ```
 
+# Primitive Types
+We mostly deal with complex objects or arrays when working with JSON, but data like `3`, `3.1412` and `"birds"` are also valid JSON strings.
+
+We can unmarshal these values to their corresponding data type in Go by using primitive types:
+
+```
+numberJson := "3"
+floatJson := "3.1412"
+stringJson := `"bird"`
+
+var n int
+var pi float64
+var str string
+
+json.Unmarshal([]byte(numberJson), &n)
+fmt.Println(n)
+// 3
+
+json.Unmarshal([]byte(floatJson), &pi)
+fmt.Println(pi)
+// 3.1412
+
+json.Unmarshal([]byte(stringJson), &str)
+fmt.Println(str)
+// bird
+```
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
