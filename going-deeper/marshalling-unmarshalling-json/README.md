@@ -163,6 +163,18 @@ fmt.Println(str)
 // bird
 ```
 
+# Time Values
+Did you know that if you try to decode an ISO 8601 date string like `2021-10-18T11:08:47.577Z` into a `time.Time` struct, it will work out of the box?
+
+```
+dateJson := `"2021-10-18T11:08:47.577Z"`
+var date time.Time
+json.Unmarshal([]byte(dateJson), &date)
+
+fmt.Println(date)
+// 2021-10-18 11:08:47.577 +0000 UTC
+```
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
