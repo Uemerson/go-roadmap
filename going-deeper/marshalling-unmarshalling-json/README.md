@@ -199,7 +199,7 @@ func main() {
 
 Similar to the `time.Time` struct, we can also create custom types that implement the `Unmarshaler` interface. This will allow us to define custom logic for decoding JSON data into our custom types.
 
-To illustrate this, let’s take the `nested dimension example` from before. Suppose we receive the `dimensions` data as a formatted string:
+To illustrate this, let’s take the [nested dimension example](#nested-objects) from before. Suppose we receive the `dimensions` data as a formatted string:
 
 ```
 {
