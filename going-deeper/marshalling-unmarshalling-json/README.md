@@ -293,6 +293,46 @@ fmt.Println(bird)
 // {pigeon likes to perch on rocks}
 ```
 
+# Decoding JSON to Maps - Unstructured Data
+
+If you don’t know the structure of your JSON properties beforehand, you cannot use structs to unmarshal your data.
+
+Instead you can use maps. Consider some JSON of the form:
+
+```
+{
+  "birds": {
+    "pigeon":"likes to perch on rocks",
+    "eagle":"bird of prey"
+  },
+  "animals": "none"
+}
+```
+
+There is no struct we can build to represent the above data for all cases since the keys corresponding to the birds can change, which will change the structure.
+
+To deal with this case we create a map of strings to empty interfaces:
+
+```
+birdJson := `{"birds":{"pigeon":"likes to perch on rocks","eagle":"bird of prey"},"animals":"none"}`
+var result map[string]any
+json.Unmarshal([]byte(birdJson), &result)
+
+// The object stored in the "birds" key is also stored as 
+// a map[string]any type, and its type is asserted from
+// the `any` type
+birds := result["birds"].(map[string]any)
+
+for key, value := range birds {
+  // Each value is an `any` type, that is type asserted as a string
+  fmt.Println(key, value.(string))
+}
+```
+
+Each string corresponds to a JSON property, and its mapped `any` type corresponds to the value, which can be of any type. We then use type assertions to convert this `any` type into its actual type.
+
+These maps can be iterated over, so an unknown number of keys can be handled by a simple for loop.
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
