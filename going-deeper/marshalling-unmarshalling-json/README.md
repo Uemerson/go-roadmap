@@ -333,6 +333,46 @@ Each string corresponds to a JSON property, and its mapped `any` type correspond
 
 These maps can be iterated over, so an unknown number of keys can be handled by a simple for loop.
 
+# Validating JSON Data
+
+In real-world applications, we may sometimes get invalid (or incomplete) JSON data. Let’s see an example where some of the data is cut off, and the resulting JSON string is invalid:
+
+```
+{
+  "birds": {
+    "pigeon":"likes to perch on rocks",
+    "eagle":"bird of prey"
+```
+
+In actual applications, this may happen due to network errors or incomplete data written to files
+
+If we try to unmarshal this, our code will panic:
+
+```
+birdJson := `{"birds":{"pigeon":"likes to perch on rocks","eagle":"bird of prey"`
+var result map[string]any
+json.Unmarshal([]byte(birdJson), &result)
+```
+
+Output:
+`panic: interface conversion: interface {} is nil, not map[string]interface {}`
+
+We can, of course handle the panic and recover from our code, but this would not be idiomatic or readable.
+
+Instead, we can use the json.Valid function to check the validity of our JSON data:
+
+```
+if !json.Valid([]byte(birdJson)) {
+	// handle the error here
+	fmt.Println("invalid JSON string:", birdJson)
+	return
+}
+```
+
+Now, our code will return early and give the output:
+
+`invalid JSON string: {"birds":{"pigeon":"likes to perch on rocks","eagle":"bird of prey"`
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
