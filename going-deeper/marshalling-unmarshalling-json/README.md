@@ -565,6 +565,40 @@ func main() {
 }
 ```
 
+## Custom Encoding Logic
+
+Similar to custom decoding logic, we can also create custom types that implement the Marshaler interface. This will allow us to define custom logic for encoding our custom types into JSON data.
+
+To illustrate this, let’s take the nested dimension example from before. Suppose we want to encode the `dimensions` data as a formatted string `"24x10"`
+
+We can modify the `Dimensions` type to implement the `Marshaler` interface, which will have custom encoding logic for our data:
+
+```
+type Dimensions struct {
+	Height int
+	Width  int
+}
+
+// marshals a Dimensions struct into a JSON string
+// with format "heightxwidth"
+func (d Dimensions) MarshalJSON() ([]byte, error) {
+	return []byte(fmt.Sprintf(`"%dx%d"`, d.Height, d.Width)), nil
+}
+
+func main() {
+	bird := Bird{
+		Species: "pigeon",
+		Dimensions: Dimensions{
+			Height: 24,
+			Width:  10,
+		},
+	}
+	birdJson, _ := json.Marshal(bird)
+	fmt.Println(string(birdJson))
+	// {"Species":"pigeon","Dimensions":"24x10"}
+}
+```
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
