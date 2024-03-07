@@ -541,6 +541,30 @@ Output:
 {"birdSounds":{"eagle":"squawk","pigeon":"coo"},"total birds":2}
 ```
 
+## Encoding “Null” Values
+
+Sometimes, we may want to send a `null` value in our JSON data. Any `nil` values in our Go code will be encoded as `null` in the JSON string. But this means that any nullable fields in our struct must be pointers, or any other type that can be `nil`.
+
+For example, consider the case where we want to send a `null` value for the `Description` field of our Bird struct. We can do this by using a pointer to the `Description` field:
+
+```
+type Bird struct {
+	Species     string
+	Description *string
+}
+
+func main() {
+	pigeon := &Bird{
+		Species:     "Pigeon",
+		Description: nil,
+	}
+
+	data, _ := json.Marshal(pigeon)
+	fmt.Println(string(data))
+	// {"Species":"Pigeon","Description":null}
+}
+```
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
