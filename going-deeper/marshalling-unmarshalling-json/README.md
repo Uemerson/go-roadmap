@@ -416,6 +416,73 @@ This will give the output:
 
 `{"birdType":"Pigeon","what it does":"likes to eat seed"}`
 
+## Ignoring Empty Fields
+In some cases, we would want to ignore a field in our JSON output, if its value is empty. We can use the `“omitempty”` property for this purpose.
+
+For example, if the`Description` field is missing for the `pigeon` object, the key will not appear in the encoded JSON string incase we set this property:
+
+```
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type Bird struct {
+	Species     string `json:"birdType"`
+	// we can set the "omitempty" property as part of the JSON tag
+	Description string `json:"what it does,omitempty"`
+}
+
+func main() {
+	pigeon := &Bird{
+		Species:     "Pigeon",
+	}
+
+	data, _ := json.Marshal(pigeon)
+
+	fmt.Println(string(data))
+}
+```
+
+This will give us the output:
+
+```
+`{"birdType":"Pigeon"}`
+```
+
+If we want to always ignore a field, we can use the `json:"-"` struct tag to denote that we never want this field included:
+
+```
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+)
+
+type Bird struct {
+	Species     string `json:"-"`
+}
+
+func main() {
+	pigeon := &Bird{
+		Species:     "Pigeon",
+	}
+
+	data, _ := json.Marshal(pigeon)
+
+	fmt.Println(string(data))
+}
+```
+
+This code will always print an empty JSON object:
+
+```
+{}
+```
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
