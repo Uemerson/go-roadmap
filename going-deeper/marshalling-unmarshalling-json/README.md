@@ -483,6 +483,27 @@ This code will always print an empty JSON object:
 {}
 ```
 
+## Marshaling Slices
+
+This isn’t much different from structs. We just need to pass the slice or array to the `json.Marshal` function, and it will encode data like you expect:
+
+```
+pigeon := &Bird{
+  Species:     "Pigeon",
+  Description: "likes to eat seed",
+}
+
+// Now we pass a slice of two pigeons
+data, _ := json.Marshal([]*Bird{pigeon, pigeon})
+fmt.Println(string(data))
+```
+
+This will give the output:
+
+```
+[{"birdType":"Pigeon","what it does":"likes to eat seed"},{"birdType":"Pigeon","what it does":"likes to eat seed"}]
+```
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
