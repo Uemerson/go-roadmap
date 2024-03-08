@@ -599,6 +599,33 @@ func main() {
 }
 ```
 
+## Printing Formatted (Pretty-Printed) JSON
+
+By default, the JSON encoder will not add any whitespace to the encoded JSON string. This is done to reduce the size of the JSON string, and is useful when sending data over the network.
+
+But, if you want to print the JSON string to the console, or write it to a file, you may want to add whitespace to make it more readable. We can do this by using the json.MarshalIndent function:
+
+```
+bird := Bird{
+	Species: "pigeon",
+	Description: "likes to eat seed",
+}
+
+// The second parameter is the prefix of each line, and the third parameter
+// is the indentation to use for each level
+data, _ := json.MarshalIndent(bird, "", "  ")
+fmt.Println(string(data))
+```
+
+The output in this case will be a formatted JSON string, instead of the compressed one-liner response that we’ve been getting so far:
+
+```
+{
+	"Species": "pigeon",
+	"Description": "likes to eat seed"
+}
+```
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
