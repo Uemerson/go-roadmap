@@ -626,6 +626,12 @@ The output in this case will be a formatted JSON string, instead of the compress
 }
 ```
 
+# Best Practices (Structs vs Maps)
+
+As a general rule of thumb, if you can use structs to represent your JSON data, you should use them. The only good reason to use maps would be if it were not possible to use structs due to the uncertain nature of the keys or values in the data.
+
+If we use maps, we will either need each of the keys to have the same data type, or use a generic type and convert it later.
+
 # Reference(s)
 
 [JSON and Go](https://go.dev/blog/json)
