@@ -51,8 +51,16 @@ In Go, function literals are closures: the implementation makes sure the variabl
 
 These examples aren't too practical because the functions have no way of signaling completion. For that, we need channels.
 
+# Advantages of Goroutines
+- Goroutines are cheaper than threads.
+- Goroutine are stored in the stack and the size of the stack can grow and shrink according to the requirement of the program. But in threads, the size of the stack is fixed.
+- Goroutines can communicate using the channel and these channels are specially designed to prevent race conditions when accessing shared memory using Goroutines.
+- Suppose a program has one thread, and that thread has many Goroutines associated with it. If any of Goroutine blocks the thread due to resource requirement then all the remaining Goroutines will assign to a newly created OS thread. All these details are hidden from the programmers.
+
 # Reference(s)
 
 [A Tour of Go](https://go.dev/tour/concurrency/1)
 
 [Effective Go](https://go.dev/doc/effective_go#goroutines)
+
+[Goroutines – Concurrency in Golang](https://www.geeksforgeeks.org/goroutines-concurrency-in-golang/)
