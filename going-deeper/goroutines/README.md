@@ -57,6 +57,18 @@ These examples aren't too practical because the functions have no way of signali
 - Goroutines can communicate using the channel and these channels are specially designed to prevent race conditions when accessing shared memory using Goroutines.
 - Suppose a program has one thread, and that thread has many Goroutines associated with it. If any of Goroutine blocks the thread due to resource requirement then all the remaining Goroutines will assign to a newly created OS thread. All these details are hidden from the programmers.
 
+# Anonymous Goroutine
+In Go language, you can also start Goroutine for an anonymous function or in other words, you can create an anonymous Goroutine simply by using go keyword as a prefix of that function as shown in the below Syntax:
+
+```
+// Anonymous function call
+go func (parameter_list){
+// statement
+}(arguments)
+```
+
+[See this example.](./examples/anonymous-goroutine/main.go)
+
 # Reference(s)
 
 [A Tour of Go](https://go.dev/tour/concurrency/1)
