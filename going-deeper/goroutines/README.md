@@ -54,3 +54,5 @@ These examples aren't too practical because the functions have no way of signali
 # Reference(s)
 
 [A Tour of Go](https://go.dev/tour/concurrency/1)
+
+[Effective Go](https://go.dev/doc/effective_go#goroutines)
