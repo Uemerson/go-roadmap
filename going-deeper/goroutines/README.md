@@ -69,6 +69,20 @@ go func (parameter_list){
 
 [See this example.](./examples/anonymous-goroutine/main.go)
 
+# WaitGroups
+
+Wait groups are a mechanism for managing concurrency in Go. They provide a way to wait for a group of goroutines to complete their execution before proceeding further.
+
+Wait groups are created using the sync package, and they provide three essential methods: `Add()`, `Done()`, and `Wait()`.
+
+- `Add()` is used to add the number of goroutines that need to be waited upon.
+- `Done()` is called by each goroutine when it finishes its work, decrementing the internal counter of the wait group.
+- `Wait()` is used to block the execution of the goroutine until all the goroutines have called `Done()`.
+
+By incrementing the wait group counter with `Add()`, each goroutine signals that it needs to be waited upon. When a goroutine finishes its work, it calls `Done()`, reducing the wait group counter. The main goroutine or another goroutine can then call `Wait()` to block until the wait group counter reaches zero.
+
+[In this example](./examples/wait-group/main.go), each worker performs some work, and before starting the work, we increment the wait group counter using wg.Add(1). After each worker finishes its work, it calls wg.Done(), decrementing the wait group counter. Finally, the main goroutine calls wg.Wait() to block until all the workers have completed, and then it proceeds to print "All workers finished".
+
 # Reference(s)
 
 [A Tour of Go](https://go.dev/tour/concurrency/1)
@@ -76,3 +90,5 @@ go func (parameter_list){
 [Effective Go](https://go.dev/doc/effective_go#goroutines)
 
 [Goroutines – Concurrency in Golang](https://www.geeksforgeeks.org/goroutines-concurrency-in-golang/)
+
+[Concurrency in Go: Channels and WaitGroups](https://medium.com/goturkiye/concurrency-in-go-channels-and-waitgroups-25dd43064d1)
