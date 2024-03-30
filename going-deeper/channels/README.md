@@ -21,6 +21,10 @@ By default channels are unbuffered, meaning that they will only accept sends (ch
 
 Because this channel is buffered, we can send these values into the channel without a corresponding concurrent receive. Later we can receive these two values as usual.
 
+# Channel Synchronization
+
+We can use channels to synchronize execution across goroutines. [Here’s an example](./examples/channel-synchronization/main.go) of using a blocking receive to wait for a goroutine to finish. When waiting for multiple goroutines to finish, you may prefer to use a `WaitGroup.` The `done` channel will be used to notify another goroutine that this function’s work is done. `<-done` will block the program execution until we receive a notification from the worker on the channel.
+
 # Reference(s)
 
 [Go by Example: Channels](https://gobyexample.com/channels)
