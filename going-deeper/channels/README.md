@@ -31,6 +31,11 @@ When using channels as function parameters, you can specify if a channel is mean
 
 [In this example](./examples/channel-directions/main.go) the ping function only accepts a channel for sending values. It would be a compile-time error to try to receive on this channel. The pong function accepts one channel for receives (pings) and a second for sends (pongs).
 
+# Select
+
+Go’s select lets you wait on multiple channel operations. Combining goroutines and channels with select is a powerful feature of Go.
+
+[In this example](./examples/channel-select/main.go) each channel will receive a value after some amount of time, to simulate e.g. blocking RPC operations executing in concurrent goroutines. We’ll use select to await both of these values simultaneously, printing each one as it arrives.
 
 # Reference(s)
 
