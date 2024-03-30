@@ -25,6 +25,13 @@ Because this channel is buffered, we can send these values into the channel with
 
 We can use channels to synchronize execution across goroutines. [Here’s an example](./examples/channel-synchronization/main.go) of using a blocking receive to wait for a goroutine to finish. When waiting for multiple goroutines to finish, you may prefer to use a `WaitGroup.` The `done` channel will be used to notify another goroutine that this function’s work is done. `<-done` will block the program execution until we receive a notification from the worker on the channel.
 
+# Channel Directions
+
+When using channels as function parameters, you can specify if a channel is meant to only send or receive values. This specificity increases the type-safety of the program.
+
+[In this example](./examples/channel-directions/main.go) the ping function only accepts a channel for sending values. It would be a compile-time error to try to receive on this channel. The pong function accepts one channel for receives (pings) and a second for sends (pongs).
+
+
 # Reference(s)
 
 [Go by Example: Channels](https://gobyexample.com/channels)
