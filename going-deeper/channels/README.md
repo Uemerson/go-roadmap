@@ -53,6 +53,12 @@ Closing a channel indicates that no more values will be sent on it. This can be 
 
 [In this example](./examples/closing-channels/main.go) we’ll use a jobs channel to communicate work to be done from the `main()` goroutine to a worker goroutine. When we have no more jobs for the worker we’ll close the jobs channel.
 
+# Range over Channels
+
+ We can use range syntax to iterate over values received from a channel.
+
+[See this example](./examples/range-over-channels/main.go)
+
 # Reference(s)
 
 [Go by Example: Channels](https://gobyexample.com/channels)
