@@ -47,6 +47,12 @@ A non-blocking send works similarly. In the example `msg` cannot be sent to the 
 
 We can use multiple `cases` above the default clause to implement a multi-way non-blocking select. Here we attempt non-blocking receives on both messages and signals.
 
+# Closing Channels
+
+Closing a channel indicates that no more values will be sent on it. This can be useful to communicate completion to the channel’s receivers.
+
+[In this example](./examples/closing-channels/main.go) we’ll use a jobs channel to communicate work to be done from the `main()` goroutine to a worker goroutine. When we have no more jobs for the worker we’ll close the jobs channel.
+
 # Reference(s)
 
 [Go by Example: Channels](https://gobyexample.com/channels)
