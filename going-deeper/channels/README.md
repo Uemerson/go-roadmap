@@ -59,6 +59,16 @@ Closing a channel indicates that no more values will be sent on it. This can be 
 
 [See this example](./examples/range-over-channels/main.go)
 
+# Deadlock
+
+One important factor to consider while using channels is deadlock. If a Goroutine is sending data on a channel, then it is expected that some other Goroutine should be receiving the data. If this does not happen, then the program will panic at runtime with Deadlock.
+
+Similarly, if a Goroutine is waiting to receive data from a channel, then some other Goroutine is expected to write data on that channel, else the program will panic.
+
+[In this example](./examples/deadlock-channels/main.go), a channel `ch` is created and we send `5` to the channel in line no. 6 `ch <- 5`. In this program no other Goroutine is receiving data from the channel `ch`. Hence this program will panic with the following runtime error.
+
 # Reference(s)
 
 [Go by Example: Channels](https://gobyexample.com/channels)
+
+[Channels](https://golangbot.com/channels/)
