@@ -13,6 +13,21 @@ When we run the program the "ping" message is successfully passed from one gorou
 
 By default sends and receives block until both the sender and receiver are ready. This property allowed us to wait at the end of our program for the "ping" message without having to use any other synchronization.
 
+# Sending and receiving from a channel
+
+The syntax to send and receive data from a channel is given below,
+
+```
+data := <- a // read from channel a
+a <- data // write to channel a
+```
+
+The direction of the arrow with respect to the channel specifies whether the data is sent or received.
+
+In the first line, the arrow points outwards from `a` and hence we are reading from channel `a` and storing the value to the variable `data`.
+
+In the second line, the arrow points towards a and hence we are writing to channel `a`.
+
 # Channel Buffering
 
 By default channels are unbuffered, meaning that they will only accept sends (chan <-) if there is a corresponding receive (<- chan) ready to receive the sent value. Buffered channels accept a limited number of values without a corresponding receiver for those values.
