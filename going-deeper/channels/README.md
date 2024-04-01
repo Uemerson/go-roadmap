@@ -28,6 +28,14 @@ In the first line, the arrow points outwards from `a` and hence we are reading f
 
 In the second line, the arrow points towards a and hence we are writing to channel `a`.
 
+# Sends and receives are blocking by default
+
+Sends and receives to a channel are blocking by default. What does this mean? When data is sent to a channel, the control is blocked in the send statement until some other Goroutine reads from that channel. Similarly, when data is read from a channel, the read is blocked until some Goroutine writes data to that channel.
+
+This property of channels is what helps Goroutines communicate effectively without the use of explicit locks or conditional variables that are quite common in other programming languages.
+
+It’s ok if this doesn’t make sense now. The upcoming sections will add more clarity on how channels are blocking by default.
+
 # Channel Buffering
 
 By default channels are unbuffered, meaning that they will only accept sends (chan <-) if there is a corresponding receive (<- chan) ready to receive the sent value. Buffered channels accept a limited number of values without a corresponding receiver for those values.
