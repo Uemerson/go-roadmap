@@ -13,6 +13,10 @@ To understand how a mutex solves race conditions, let’s consider [this example
 
 We need to use the `sync.Mutex` type to prevent multiple goroutines from accessing counter at the same time. [See this example](./examples/fix-race-condition-with-mutex/main.go)
 
+# Where Not to Use Mutex
+1. High Contention: If many goroutines are frequently trying for the same lock, the performance of mutexes can degrade. In such cases, consider using alternative synchronization primitives like sync.RWMutex or channel-based communication patterns.
+2. Deadlock Risks: Improper use of mutexes can lead to deadlocks, where goroutines end up waiting indefinitely for a lock to be released. Avoid complex nesting of locks or forgetting to unlock the mutex.
+
 # Reference(s)
 
 [Understanding Mutex in Go](https://kamnagarg-10157.medium.com/understanding-mutex-in-go-5f41199085b9)
